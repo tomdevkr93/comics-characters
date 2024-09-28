@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="/images/marvel_logo.svg" alt="로고" width=250 height=250>
+    <img src="https://github.com/user-attachments/assets/1d0e9d09-cd35-492b-99f0-55d99a3f1252" alt="마블 로고" width=250 height=250>
 </p>
 
 <h1 align="center">🦸‍♂️ Marvel Explorer</h1>
