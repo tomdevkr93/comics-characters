@@ -29,7 +29,7 @@
 
 <br>
 마블 익스플로러는 마블 코믹스 API를 사용하여 마블 캐릭터 목록과 상세 정보를 표시하는 Next.js 웹 애플리케이션입니다.<br />
-마블 유니버스의 수백 명의 영웅과 빌런들을 둘러보고 그들의 능력과 특징에 대해 자세히 알아보세요.
+마블 유니버스의 수백 명의 영웅과 빌런들을 둘러보고 그들의 능력과 특징을 확인할 수 있습니다.
 <br>
 <br>
 이 프로젝트는 Next.js 14, TypeScript, TanStack Query를 사용한 효율적인 데이터 페칭, NextAuth.js를 이용한 인증 등 최신 웹 개발 기술을 적용하고 학습하기 위한 프로젝트입니다.
@@ -62,7 +62,7 @@ Marvel Explorer를 시작하려면 다음 단계를 따르세요
 1. 저장소 클론
 
    ```
-   git clone https://github.com/yourusername/marvel-explorer.git
+   git clone https://github.com/tomdevkr93/marvel-explorer.git
    ```
 
 2. 의존성 설치
