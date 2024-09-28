@@ -1,0 +1,25 @@
+.container {
+  width: 100dvw;
+  height: 100dvh;
+
+  background: url("/images/marvel_background.webp") no-repeat center center;
+  background-size: cover;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marvelLogo {
+  position: relative;
+  width: 140px;
+  height: 56px;
+  margin-top: 50px;
+}
