@@ -131,7 +131,7 @@ Marvel Explorer를 시작하려면 다음 단계를 따르세요
 | [Next.js 14](https://nextjs.org/)                   | 웹 애플리케이션 구축을 위한 React 프레임워크 |
 | [TypeScript](https://www.typescriptlang.org/)       | 정적 타이핑 및 개선된 개발자 경험            |
 | [TanStack Query](https://tanstack.com/query/latest) | 데이터 페칭, 캐싱, 상태 관리                 |
-| [NextAuth.js](https://next-auth.js.org/)            | 인증 및 세션 관리                            |
+| [NextAuth.js](https://next-auth.js.org/)            | 인증 및 세션 관리(CredentialsProvider, Google)   |
 | [Marvel Comics API](https://developer.marvel.com/)  | 마블 캐릭터 및 코믹스 데이터 가져오기        |
 | [ESLint](https://eslint.org/)                       | 코드 린팅 및 포맷팅                          |
 
