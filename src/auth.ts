@@ -1,4 +1,5 @@
-import NextAuth from "next-auth";
+import NextAuth, { User } from "next-auth";
+import { AdapterUser } from "next-auth/adapters";
 import Credentials from "next-auth/providers/credentials";
 
 export const {
@@ -12,33 +13,50 @@ export const {
     signIn: "/",
     newUser: "/signup",
   },
-  session: {
-    strategy: "jwt", // JSON Web Token 사용
-    maxAge: 60 * 60 * 24, // 세션 만료 시간(sec)
-  },
   providers: [
     Credentials({
-      authorize: async (credentials) => {
-        const { name, email, password } = credentials;
-
-        if (name) {
-          // TODO: 회원가입 서버 요청
-          return {
-            id: "1",
-            name: name as string,
-            email: email as string,
-            image: "",
-          };
-        }
+      name: "Credentials",
+      authorize: async (credentials): Promise<User | null> => {
+        const { email, password } = credentials;
 
         // TODO: 로그인 서버 요청
-        return {
-          id: "1",
-          name: name as string,
-          email: email as string,
-          image: "",
+        // let response = await backendLogin(email, password)
+        const response = {
+          success: true,
+          data: {
+            accessToken: "testAccessToken",
+            user: {
+              id: "user1",
+              email,
+              name: "홍길동",
+            },
+          },
         };
-      },
+
+        if (!response.success) {
+          return null;
+        }
+
+        return {
+          accessToken: response.data.accessToken,
+          email: response.data.user.email as string,
+          name: response.data.user.name as string,
+        };
+      }, // 새로운 세션 생성과 함께 jwt를 쿠키에 저장
     }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        token.accessToken = user.accessToken;
+        token.email = user.email;
+        token.name = user.name;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      session.accessToken = token.accessToken as string;
+      return session;
+    },
+  },
 });

@@ -2,20 +2,20 @@
 
 import { signIn, signOut } from "@/auth";
 
-export interface SignInWithCredentialsResult {
-  error?: string;
-  success?: boolean;
-}
+export type SignInResult = {
+  status: "success" | "error";
+  message?: string;
+};
 
 export const signInWithCredentials = async (
-  _: SignInWithCredentialsResult,
+  _: SignInResult | null,
   formData: FormData
-): Promise<SignInWithCredentialsResult> => {
+): Promise<SignInResult> => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
   if (!email || !password) {
-    return { error: "이메일과 비밀번호를 입력해주세요" };
+    return { status: "error", message: "이메일과 비밀번호를 입력해주세요" };
   }
 
   try {
@@ -26,10 +26,13 @@ export const signInWithCredentials = async (
     });
   } catch (error) {
     console.error(error);
-    return { error: "올바른 이메일과 비밀번호를 입력해주세요" };
+    return {
+      status: "error",
+      message: "올바른 이메일과 비밀번호를 입력해주세요",
+    };
   }
 
-  return { success: true };
+  return { status: "success" };
 };
 
 export const signOutWithForm = async () => {

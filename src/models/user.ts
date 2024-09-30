@@ -1,11 +1,5 @@
-export interface User {
+export type User = {
   id: string;
+  email: string;
   name: string;
-  password: string;
-}
-
-export const DUMMY_USER: User = {
-  id: "1",
-  name: "John Doe",
-  password: "password",
 };
