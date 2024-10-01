@@ -19,8 +19,8 @@ export const handlers = [
     return HttpResponse.json<LoginResponse>({
       status: "error",
       error: {
-        code: "no_such_user",
-        message: "No such user",
+        code: "NO_SUCH_USER",
+        message: "찾을 수 없는 유저",
       },
     });
   }),

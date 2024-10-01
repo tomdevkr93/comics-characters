@@ -1,3 +1,5 @@
+import { AppError } from "@/models/errors";
+
 interface HTTPInstance {
   get<T>(url: string, config?: RequestInit): Promise<T>;
   delete<T>(url: string, config?: RequestInit): Promise<T>;
@@ -50,7 +52,7 @@ class Service {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new AppError("INTERNAL_SERVER_ERROR", "서버 오류");
       }
 
       const responseData: T = await response.json();

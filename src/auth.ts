@@ -1,6 +1,7 @@
 import NextAuth, { User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import AuthService from "./service/auth/AuthService";
+import { AppError, ErrorCode } from "./models/errors";
 
 export const {
   handlers,
@@ -30,7 +31,10 @@ export const {
           );
 
           if (response.status === "error") {
-            throw new Error(response.error.code);
+            throw new AppError(
+              response.error.code as ErrorCode,
+              response.error.message
+            );
           }
 
           return {
@@ -39,7 +43,11 @@ export const {
             accessToken: response.data.accessToken,
           };
         } catch (error) {
-          throw new Error(error);
+          console.error(error);
+          if (error instanceof AppError) {
+            throw new AppError(error.code, error.message, error.cause);
+          }
+          return null;
         }
       },
     }),

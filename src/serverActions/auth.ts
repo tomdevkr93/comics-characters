@@ -24,8 +24,7 @@ export const signInWithCredentials = async (
       password,
       redirect: false,
     });
-  } catch (error) {
-    console.error(111, error);
+  } catch {
     return {
       status: "error",
       message: "올바른 이메일과 비밀번호를 입력해주세요",
