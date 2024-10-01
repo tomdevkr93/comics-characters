@@ -2,9 +2,9 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import styles from "./LoginForm.module.css";
-import { signInWithCredentials } from "@/serverActions/auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { signInWithCredentials } from "@/serverActions/auth";
 
 export default function LoginForm() {
   const router = useRouter();

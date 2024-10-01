@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
-import "@/styles/normalize.css";
-import "@/styles/globals.css";
+import "./normalize.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Marvel Explorer",

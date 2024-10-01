@@ -1,6 +1,6 @@
 import NextAuth, { User } from "next-auth";
-import { AdapterUser } from "next-auth/adapters";
 import Credentials from "next-auth/providers/credentials";
+import AuthService from "./service/auth/AuthService";
 
 export const {
   handlers,
@@ -13,48 +13,45 @@ export const {
     signIn: "/",
     newUser: "/signup",
   },
+  session: {
+    strategy: "jwt",
+    maxAge: 60 * 60 * 24 * 1, // 30 days
+  },
   providers: [
     Credentials({
       name: "Credentials",
       authorize: async (credentials): Promise<User | null> => {
         const { email, password } = credentials;
 
-        // TODO: 로그인 서버 요청
-        // let response = await backendLogin(email, password)
-        const response = {
-          success: true,
-          data: {
-            accessToken: "testAccessToken",
-            user: {
-              id: "user1",
-              email,
-              name: "홍길동",
-            },
-          },
-        };
+        try {
+          const response = await AuthService.login(
+            email as string,
+            password as string
+          );
 
-        if (!response.success) {
-          return null;
+          if (response.status === "error") {
+            throw new Error(response.error.code);
+          }
+
+          return {
+            email: response.data.email,
+            name: response.data.name,
+            accessToken: response.data.accessToken,
+          };
+        } catch (error) {
+          throw new Error(error);
         }
-
-        return {
-          accessToken: response.data.accessToken,
-          email: response.data.user.email as string,
-          name: response.data.user.name as string,
-        };
-      }, // 새로운 세션 생성과 함께 jwt를 쿠키에 저장
+      },
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
+    jwt: async ({ token, user }) => {
       if (user) {
         token.accessToken = user.accessToken;
-        token.email = user.email;
-        token.name = user.name;
       }
       return token;
     },
-    session({ session, token }) {
+    session: async ({ session, token }) => {
       session.accessToken = token.accessToken as string;
       return session;
     },
