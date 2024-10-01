@@ -52,8 +52,10 @@
 - [라이선스](#라이선스)
 
 ## 스크린샷
-
 [스크린샷 추가 예정]
+
+<img src="https://github.com/user-attachments/assets/51ec4f60-e4ce-46a8-b655-4d07df2f8e0f" width="360" />
+
 
 ## 빠른 시작
 
