@@ -1,6 +1,8 @@
 'use server'
 
 import { signIn, signOut } from '@/auth'
+import { AppError } from '@/models/errors'
+import { ActionResponse } from '@/models/server-action-response'
 
 type SignInWithCredentialsResult = {
   status: 'success' | 'error'
@@ -10,7 +12,7 @@ type SignInWithCredentialsResult = {
 export const signInWithCredentials = async (
   _: SignInWithCredentialsResult | null,
   formData: FormData
-): Promise<SignInWithCredentialsResult> => {
+): Promise<ActionResponse> => {
   const email = formData.get('email') as string
   const password = formData.get('password') as string
 
@@ -31,7 +33,7 @@ export const signInWithCredentials = async (
     }
   }
 
-  return { status: 'success' }
+  return { status: 'success', message: '로그인 성공' }
 }
 
 export const signOutWithForm = async () => {

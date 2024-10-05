@@ -1,7 +1,7 @@
 import NextAuth, { User } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import AuthService from './services/auth/AuthService'
-import { AppError, ErrorCode } from './models/errors'
+import { AppError } from './models/errors'
 
 export const {
   handlers,
@@ -27,21 +27,13 @@ export const {
         try {
           const response = await AuthService.login(email as string, password as string)
 
-          if (response.status === 'error') {
-            throw new AppError(response.error.code as ErrorCode, response.error.message)
-          }
-
           return {
-            email: response.data.email,
-            name: response.data.name,
-            accessToken: response.data.accessToken
+            email: response.email,
+            name: response.name,
+            accessToken: response.accessToken
           }
         } catch (error) {
-          console.error(error)
-          if (error instanceof AppError) {
-            throw new AppError(error.code, error.message, error.cause)
-          }
-          return null
+          throw error
         }
       }
     })

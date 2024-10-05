@@ -1,4 +1,4 @@
-import { AppError } from '@/models/errors'
+import { AppError, ErrorType } from '@/models/errors'
 
 interface HTTPInstance {
   get<T>(url: string, config?: RequestInit): Promise<T>
@@ -47,14 +47,17 @@ class Service {
       })
 
       if (!response.ok) {
-        throw new AppError('INTERNAL_SERVER_ERROR', '서버 오류')
+        throw AppError.from(response.status)
       }
 
       const responseData: T = await response.json()
       return responseData
     } catch (error) {
-      console.error('Error:', error)
-      throw error
+      if (error instanceof AppError) throw error
+
+      throw new AppError(
+        error instanceof TypeError || error instanceof DOMException ? ErrorType.NETWORK_ERROR : ErrorType.UNKNOWN_ERROR
+      )
     }
   }
 
