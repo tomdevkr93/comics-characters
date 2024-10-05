@@ -1,20 +1,20 @@
-import { createMiddleware } from "@mswjs/http-middleware";
-import express from "express";
-import cors from "cors";
-import { handlers } from "@/mocks/handler";
+import { createMiddleware } from '@mswjs/http-middleware'
+import express from 'express'
+import cors from 'cors'
+import { handlers } from '@/mocks/handler'
 
-const app = express();
+const app = express()
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ['http://localhost:3000'],
     optionsSuccessStatus: 200,
-    credentials: true,
+    credentials: true
   })
-);
-app.use(express.json());
-app.use(createMiddleware(...handlers));
+)
+app.use(express.json())
+app.use(createMiddleware(...handlers))
 
 app.listen(8080, () => {
-  console.log("CREATE MOCK SERVER");
-});
+  console.log('CREATE MOCK SERVER')
+})

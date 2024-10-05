@@ -2,7 +2,7 @@
   width: 100dvw;
   height: 100dvh;
 
-  background: url("/images/marvel_background.webp") no-repeat center center;
+  background: url('/images/marvel_background.webp') no-repeat center center;
   background-size: cover;
 
   display: flex;
