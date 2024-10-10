@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { PropsWithChildren } from 'react'
 import './normalize.css'
 import './globals.css'
+import { pretendard } from '../../public/fonts/Pretendard'
 
 export const metadata: Metadata = {
   title: 'Marvel Explorer',
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="ko">
-      <body>{children}</body>
+    <html lang="ko" className={pretendard.variable}>
+      <body className={pretendard.className}>{children}</body>
     </html>
   )
 }
